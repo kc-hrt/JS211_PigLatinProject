@@ -11,10 +11,30 @@ const rl = readline.createInterface({
 });
 
 
-const pigLatin = (word) => {
 
-  // Your code here
+const pigLatin = (string) => {
+  string = string.toLowerCase().trim();  // force  string to lowercase and trim
+  const vowels = ['a','e','i','o','u'];  // vowel array
+  let newString = '';  // string to return
+  let vIndex = 0;  // variable to store first vowel location
 
+  // asks if the first character of a string is a vowel from the voewls array
+  if (vowels.includes(string[0])) { 
+    newString = string + 'yay';  // new string for Consonants 
+    // return newString;
+    // console.log(string + "  ::  " + newSring);
+  } else {
+
+    for (let char of string) {  // loop to find first vowel
+      if (vowels.includes(char)) {  // found first vowel
+        vIndex = string.indexOf(char)  // store index of first vowel
+        // compose final string for vowels
+        newString =  string.slice(vIndex) + string.slice(0,vIndex) + 'ay'; 
+        break; // break out of loop
+      }
+    }
+  }
+  return newString;
 }
 
 // the first function called in the program to get an input from the user
