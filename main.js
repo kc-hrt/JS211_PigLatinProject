@@ -1,28 +1,43 @@
 'use strict';
 
 // brings in the assert module for unit testing
-const assert = require('assert');
+// const assert = require('assert');
 // brings in the readline module to access the command line
-const readline = require('readline');
+// const readline = require('readline');
 // use the readline module to print out to the command line
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout
-});
+// const rl = readline.createInterface({
+  // input: process.stdin,
+  // output: process.stdout
+// });
 
+let engInput = "";
+let pigOutput = "";
 
+const pigBtnClick = () => {
+  // get input, conveert to lowercase and trim
+  engInput = document.getElementById('translateIn').value.toLowerCase().trim();
+  // split input into array called strignArray
+  let stringArray = engInput.split(" ");
+  stringArray.forEach(pigLatin);
+
+  console.log("pigOut: ", pigOutput);
+  
+  // return document.getElementById('pigOutTranslate').innerHTML = pigLatin(engInput);
+  return document.getElementById('pigOutTranslate').innerHTML = pigOutput;
+
+}
 
 const pigLatin = (string) => {
-  string = string.toLowerCase().trim();  // force  string to lowercase and trim
+
   const vowels = ['a','e','i','o','u'];  // vowel array
   let newString = '';  // string to return
   let vIndex = 0;  // variable to store first vowel location
 
   // asks if the first character of a string is a vowel from the voewls array
   if (vowels.includes(string[0])) { 
+    
     newString = string + 'yay';  // new string for Consonants 
-    // return newString;
-    // console.log(string + "  ::  " + newSring);
+    
   } else {
 
     for (let char of string) {  // loop to find first vowel
@@ -34,47 +49,49 @@ const pigLatin = (string) => {
       }
     }
   }
-  return newString;
+  // console.log(newString);
+  pigOutput = pigOutput + " " + newString
+  // return newString;
 }
 
 // the first function called in the program to get an input from the user
 // to run the function use the command: node main.js
 // to close it ctrl + C
-const getPrompt = () => {
-  rl.question('word ', (answer) => {
-    console.log( pigLatin(answer) );
-    getPrompt();
-  });
-}
+// const getPrompt = () => {
+//   rl.question('word ', (answer) => {
+//     console.log( pigLatin(answer) );
+//     getPrompt();
+//   });
+// }
 
 // Unit Tests
 // to use them run the command: npm test main.js
 // to close them ctrl + C
-if (typeof describe === 'function') {
+// if (typeof describe === 'function') {
 
-  describe('#pigLatin()', () => {
-    it('should translate a simple word', () => {
-      assert.equal(pigLatin('car'), 'arcay');
-      assert.equal(pigLatin('dog'), 'ogday');
-    });
-    it('should translate a complex word', () => {
-      assert.equal(pigLatin('create'), 'eatecray');
-      assert.equal(pigLatin('valley'), 'alleyvay');
-    });
-    it('should attach "yay" if word begins with vowel', () => {
-      assert.equal(pigLatin('egg'), 'eggyay');
-      assert.equal(pigLatin('emission'), 'emissionyay');
-    });
-    it('should lowercase and trim word before translation', () => {
-      assert.equal(pigLatin('HeLlO '), 'ellohay');
-      assert.equal(pigLatin(' RoCkEt'), 'ocketray');
-    });
-  });
-} else {
+//   describe('#pigLatin()', () => {
+//     it('should translate a simple word', () => {
+//       assert.equal(pigLatin('car'), 'arcay');
+//       assert.equal(pigLatin('dog'), 'ogday');
+//     });
+//     it('should translate a complex word', () => {
+//       assert.equal(pigLatin('create'), 'eatecray');
+//       assert.equal(pigLatin('valley'), 'alleyvay');
+//     });
+//     it('should attach "yay" if word begins with vowel', () => {
+//       assert.equal(pigLatin('egg'), 'eggyay');
+//       assert.equal(pigLatin('emission'), 'emissionyay');
+//     });
+//     it('should lowercase and trim word before translation', () => {
+//       assert.equal(pigLatin('HeLlO '), 'ellohay');
+//       assert.equal(pigLatin(' RoCkEt'), 'ocketray');
+//     });
+//   });
+// } else {
 
-  getPrompt();
+//   getPrompt();
 
-}
+// }
 
 
 
